@@ -25,11 +25,9 @@ public class SolarWatchController {
     @GetMapping("/watch/{city}")
     public ResponseEntity<SolarResponse> getSunsetByCity(@PathVariable String city) {
         var location = geocodingService.getLocationByCityName(city);
-        if (location == null) {
-            return ResponseEntity.status(404).build();
-        }
-        System.out.println(location);
+        System.out.println("Location found: " + location);
         SolarResponse res = solarWatchService.getSolarResult(location.lat(), location.lon());
+        System.out.println("Solar result: " + res);
         return ResponseEntity.ok(res);
     }
 }
