@@ -1,12 +1,10 @@
 package com.codecool.solar_watch.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "cities")
@@ -25,4 +23,7 @@ public class City {
     private Double longitude;
     private String country;
     private String state;
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SolarReport> reports;
 }
